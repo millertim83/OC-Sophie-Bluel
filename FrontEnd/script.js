@@ -34,6 +34,7 @@ function addFilterButtons() {
             const allBtn = document.createElement("button");
             allBtn.textContent = "All";
             allBtn.classList.add("filter-button");
+            allBtn.classList.add("active");
             allBtn.dataset.id = "";
             filtersContainer.appendChild(allBtn);
 
@@ -53,6 +54,10 @@ function addFilterButtonEvents() {
     const filterButtons = document.querySelectorAll(".filter-button");
     filterButtons.forEach(button => {
         button.addEventListener("click", event => {
+            filterButtons.forEach(btn => btn.classList.remove("active"));
+
+            button.classList.add("active");
+
             const categoryId = button.dataset.id;
 
             if (!categoryId) {

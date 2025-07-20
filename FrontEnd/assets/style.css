@@ -204,3 +204,8 @@ footer nav ul {
 	border-radius: 60px;
 	padding: 5px 25px;
 }
+
+.active {
+	color: white;
+	background-color: #1D6154;
+}
