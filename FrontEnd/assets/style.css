@@ -139,7 +139,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -208,4 +208,49 @@ footer nav ul {
 .active {
 	color: white;
 	background-color: #1D6154;
+}
+
+
+/* Login page */
+
+#login {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#login-form {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	font-size: 14px;
+	width: 379px;
+	height: 51px;
+}
+
+#login-form label {
+	margin-bottom: 7px;
+}
+
+#login-form input {
+	margin-bottom: 10px;
+}
+
+#sign-in {
+	background-color: #1D6154;
+	color: #FFFFFF;
+	width: 126px;
+	font-family: Syne;
+	font-size: 14px;
+	font-weight: 700;
+	border-radius: 60px;
+	align-self: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#forgot-password {
+	align-self: center;
 }
