@@ -186,7 +186,18 @@ footer nav ul {
 	margin: 2em
 }
 
+.nav-links {
+	text-decoration: none;
+	color: black;
+}
 
+.nav-links:hover {
+	color: #B1663C;
+}
+
+a:visited {
+	color: black;
+}
 
 /* Filter Buttons */
 
@@ -249,8 +260,10 @@ footer nav ul {
 	align-self: center;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	border: none;
 }
 
 #forgot-password {
 	align-self: center;
+	color: #3D3D3D;
 }
