@@ -267,3 +267,15 @@ a:visited {
 	align-self: center;
 	color: #3D3D3D;
 }
+
+.edit-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+#portfolio span {
+	color: black;
+	font-size: 14px;
+	margin-left: 15px;
+}

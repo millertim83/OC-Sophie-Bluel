@@ -3,13 +3,6 @@ let allWorks = [];
 const filtersContainer = document.getElementById("filters");
 
 
-fetch("http://localhost:5678/api/works")
-    .then(response => response.json())
-    .then(works => {
-        allWorks = works;
-        renderGallery(works);
-    });
-
 function renderGallery(works) {
     gallery.innerHTML = "";
     works.forEach(work => {
@@ -70,6 +63,49 @@ function addFilterButtonEvents() {
     });
 }
 
+
+fetch("http://localhost:5678/api/works")
+    .then(response => response.json())
+    .then(works => {
+        allWorks = works;
+        renderGallery(works);
+    });
+
 addFilterButtons();
+
+const token = localStorage.getItem("token");
+const authLink = document.getElementById("auth-link");
+const editButton = document.getElementById("edit-button");
+
+if (token) {
+    //Hide filters
+    const filtersContainer = document.getElementById("filters");
+    if (filtersContainer) {
+        filtersContainer.style.display = "none";
+    }
+    //Show logout
+    authLink.textContent = "logout";
+    authLink.href = "#";
+    authLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        window.location.reload(); 
+    });
+    //Show edit button
+    if (editButton) {
+        editButton.style.display = "inline-block";
+    }
+    
+} else {
+    authLink.textContent = "login";
+    authLink.href = "login.html";
+    editButton.style.display = "none";
+}
+
+
+
+
+
+
 
 

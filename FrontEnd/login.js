@@ -20,9 +20,12 @@ form.addEventListener("submit", async (event) => {
 
     if (response.ok) {
         localStorage.setItem("token", data.token);
-        message.textContent = "Login successful!"
+        message.textContent = "Login successful!";
+        
 
         window.location.href = "index.html";
+        console.log(data.token);
+        console.log("successful login");
     } else {
         message.textContent = "Invalid email or password."
     }
