@@ -102,6 +102,42 @@ if (token) {
     editButton.style.display = "none";
 }
 
+//***  Modal   ***//
+
+const modal = document.getElementById("modal");
+const modalClose = document.getElementById("modal-close");
+const modalGallery = document.getElementById("modal-gallery");
+
+editButton.addEventListener("click", () => {
+    //Open modal
+    modal.style.display = "block";
+    populateModalGallery();
+});
+
+modalClose.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+// Populate Thumbnails //
+
+function populateModalGallery() {
+    modalGallery.innerHTML = "";
+
+    allWorks.forEach(work => {
+        const img = document.createElement("img");
+        img.src = work.imageUrl;
+        img.alt = work.title;
+        modalGallery.appendChild(img);
+    });
+}
+
+
 
 
 

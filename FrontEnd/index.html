@@ -14,59 +14,67 @@
 
 </head>
 <body>
-<header>
-	<h1>Sophie Bluel <span>Interior Designer</span></h1>
-	<nav>
-		<ul>
-			<li><a href="index.html" class="nav-links">projects</a></li>
-			<li><a href="#" class="nav-links">contact</a></li>
-			<li><a href="login.html" id="auth-link" class="nav-links">login</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
-</header>
-<main>
-	<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Space Designer</h2>
-			<p>I tell your story and bring your ideas to life. I work with you every step of the way—from the design stage until the very end of the project.</p>
-			<p>Together, we’ll decide on the volumes, materials, and colors, while maintaining the space’s character and selection of materials. Every single aspect of the project will be thoroughly monitored, ensuring it remains on schedule and on budget.</p>
-			<p>If necessary, a multidisciplinary team can be brought into your project, including an accredited architect and a decorator.</p>
-		</article>
-	</section>
-	<section id="portfolio">
-		<h2>My Projects 
-			<span id="edit-button" class="edit-button"><i class="fa-solid fa-pen-to-square"></i> Edit
-			</span>
-		</h2>
-		<div id="filters"></div>
-		<div class="gallery" id="gallery">
-		</div>
-	</section>
-	<section id="contact">
-		<h2>Contact</h2>
-		<p>Do you have a project in mind? Let’s talk about it!</p>
-		<form action="#" method="post">
-			<label for="name">Name</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Send">
-		</form>
-	</section>
-</main>
+	<header>
+		<h1>Sophie Bluel <span>Interior Designer</span></h1>
+		<nav>
+			<ul>
+				<li><a href="index.html" class="nav-links">projects</a></li>
+				<li><a href="#" class="nav-links">contact</a></li>
+				<li><a href="login.html" id="auth-link" class="nav-links">login</a></li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section id="introduction">
+			<figure>
+				<img src="./assets/images/sophie-bluel.png" alt="">
+			</figure>
+			<article>
+				<h2>Space Designer</h2>
+				<p>I tell your story and bring your ideas to life. I work with you every step of the way—from the design stage until the very end of the project.</p>
+				<p>Together, we’ll decide on the volumes, materials, and colors, while maintaining the space’s character and selection of materials. Every single aspect of the project will be thoroughly monitored, ensuring it remains on schedule and on budget.</p>
+				<p>If necessary, a multidisciplinary team can be brought into your project, including an accredited architect and a decorator.</p>
+			</article>
+		</section>
+		<section id="portfolio">
+			<h2>My Projects 
+				<span id="edit-button" class="edit-button"><i class="fa-solid fa-pen-to-square"></i> Edit
+				</span>
+			</h2>
+			<div id="filters"></div>
+			<div class="gallery" id="gallery">
+			</div>
+		</section>
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Do you have a project in mind? Let’s talk about it!</p>
+			<form action="#" method="post">
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Send">
+			</form>
+		</section>
+	</main>
 
-<footer>
-	<nav>
-		<ul>
-			<li>Legal Notice</li>
-		</ul>
-	</nav>
-</footer>
+	<footer>
+		<nav>
+			<ul>
+				<li>Legal Notice</li>
+			</ul>
+		</nav>
+	</footer>
+
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<span id="modal-close">&times</span>
+			<h3>Photo Gallery</h3>
+			<div id="modal-gallery"></div>
+		</div>
+	</div>
 </body>
 </html>
