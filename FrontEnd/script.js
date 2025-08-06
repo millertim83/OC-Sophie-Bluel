@@ -63,7 +63,6 @@ function addFilterButtonEvents() {
     });
 }
 
-// Populate Thumbnails //
 function populateModalGallery() {
     modalGallery.innerHTML = "";
 
@@ -81,15 +80,25 @@ function populateModalGallery() {
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
         deleteIcon.addEventListener("click", () => {
-            console.log(`Delete item with ID: ${work.id}`);
+            thumbContainer.remove();
+            console.log("Work removed!")
         });
 
         //assemble
         thumbContainer.appendChild(img);
         thumbContainer.appendChild(deleteIcon);
         modalGallery.appendChild(thumbContainer);
-        
     });
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
+
+    const addPhotoBtn = document.createElement("button");
+    addPhotoBtn.classList.add("button");
+    addPhotoBtn.textContent = "Add a photo";
+
+    buttonContainer.appendChild(addPhotoBtn);
+    modalGallery.parentElement.appendChild(addPhotoBtn);
 }
 
 
@@ -137,10 +146,6 @@ const modal = document.getElementById("modal");
 const modalClose = document.getElementById("modal-close");
 const modalGallery = document.getElementById("modal-gallery");
 
-
-
-
-
 editButton.addEventListener("click", () => {
     //Open modal
     modal.style.display = "block";
@@ -156,6 +161,8 @@ window.addEventListener("click", (event) => {
         modal.style.display = "none";
     }
 });
+
+
 
 
 

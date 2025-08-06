@@ -305,6 +305,9 @@ a:visited {
 	position: relative;
 	border-radius: 10px;
 	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
   }
 
   .modal-content h3 {
@@ -326,7 +329,8 @@ a:visited {
 	gap: 5px;
 	margin-top: 20px;
 	margin-left: 20px;
-	
+	padding-left: 50px;
+	padding-right: 50px;
   }
   
   .thumbnail-container img {
@@ -349,6 +353,23 @@ a:visited {
 	object-fit: cover;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+  .button {
+	color: white;
+	background-color: #1D6154;
+	border: none;
+	width: 193px;
+	height: 35px;
+	border-radius: 60px;
+	border: none;
+	cursor: pointer;
   }
   
   /* Trash Icon Styling */
