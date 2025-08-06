@@ -63,6 +63,35 @@ function addFilterButtonEvents() {
     });
 }
 
+// Populate Thumbnails //
+function populateModalGallery() {
+    modalGallery.innerHTML = "";
+
+    allWorks.forEach(work => {
+        //container for image and delete icon
+        const thumbContainer = document.createElement("div");
+        thumbContainer.classList.add("thumbnail-container");
+
+        //create image
+        const img = document.createElement("img");
+        img.src = work.imageUrl;
+        img.alt = work.title;
+
+        //create delete icon
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
+        deleteIcon.addEventListener("click", () => {
+            console.log(`Delete item with ID: ${work.id}`);
+        });
+
+        //assemble
+        thumbContainer.appendChild(img);
+        thumbContainer.appendChild(deleteIcon);
+        modalGallery.appendChild(thumbContainer);
+        
+    });
+}
+
 
 fetch("http://localhost:5678/api/works")
     .then(response => response.json())
@@ -108,10 +137,14 @@ const modal = document.getElementById("modal");
 const modalClose = document.getElementById("modal-close");
 const modalGallery = document.getElementById("modal-gallery");
 
+
+
+
+
 editButton.addEventListener("click", () => {
     //Open modal
     modal.style.display = "block";
-    populateModalGallery();
+    populateModalGallery(allWorks);
 });
 
 modalClose.addEventListener("click", () => {
@@ -123,19 +156,6 @@ window.addEventListener("click", (event) => {
         modal.style.display = "none";
     }
 });
-
-// Populate Thumbnails //
-
-function populateModalGallery() {
-    modalGallery.innerHTML = "";
-
-    allWorks.forEach(work => {
-        const img = document.createElement("img");
-        img.src = work.imageUrl;
-        img.alt = work.title;
-        modalGallery.appendChild(img);
-    });
-}
 
 
 
