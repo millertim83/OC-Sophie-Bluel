@@ -79,26 +79,38 @@ function populateModalGallery() {
         //create delete icon
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
-        deleteIcon.addEventListener("click", () => {
-            thumbContainer.remove();
-            console.log("Work removed!")
+        deleteIcon.addEventListener("click", async () => {
+            try {
+                const response = await fetch(`http://localhost:5678/api/works/${work.id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "accept": "*/*",
+                        "Authorization": "Bearer " + localStorage.getItem("token") // use stored token
+                    }
+                });
+        
+                if (response.ok) {
+                    // remove from UI
+                    thumbContainer.remove();
+        
+                    // update local array
+                    allWorks = allWorks.filter(w => w.id !== work.id);
+        
+                    console.log(`Work with ID ${work.id} deleted successfully`);
+                } else {
+                    console.error("Failed to delete:", response.status);
+                }
+            } catch (err) {
+                console.error("Error deleting work:", err);
+            }
         });
+        
 
         //assemble
         thumbContainer.appendChild(img);
         thumbContainer.appendChild(deleteIcon);
         modalGallery.appendChild(thumbContainer);
     });
-
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("button-container");
-
-    const addPhotoBtn = document.createElement("button");
-    addPhotoBtn.classList.add("button");
-    addPhotoBtn.textContent = "Add a photo";
-
-    buttonContainer.appendChild(addPhotoBtn);
-    modalGallery.parentElement.appendChild(addPhotoBtn);
 }
 
 
