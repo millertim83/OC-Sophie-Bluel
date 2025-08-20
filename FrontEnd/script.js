@@ -114,6 +114,102 @@ function populateModalGallery() {
 }
 
 
+function renderAddPhotoForm() {
+    // clear gallery
+    modalGallery.innerHTML = "";
+    
+    // --- Upload box ---
+    const uploadBox = document.createElement("div");
+    uploadBox.classList.add("upload-box");
+    
+    // generic image icon 
+    const imageIcon = document.createElement("i");
+    imageIcon.classList.add("fa-regular", "fa-image", "upload-icon");
+
+    //preview image
+    const previewImg = document.createElement("img");
+    imageIcon.classList.add("preview-img");
+    previewImg.style.display = "none;"
+    
+    // input[type=file] hidden, triggered by button
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/png, image/jpeg";
+    fileInput.style.display = "none";
+    
+    const fileBtn = document.createElement("button");
+    fileBtn.type = "button";
+    fileBtn.textContent = "+ Add photo";
+    fileBtn.classList.add("button");
+    fileBtn.addEventListener("click", () => fileInput.click());
+    
+    const fileInfo = document.createElement("p");
+    fileInfo.textContent = "jpg, png: max 4 MB";
+
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                previewImg.src = e.target.result;
+                previewImg.style.display = "block";
+                imageIcon.style.display = "none";
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    uploadBox.appendChild(imageIcon);
+    uploadBox.appendChild(previewImg);
+    uploadBox.appendChild(fileBtn);
+    uploadBox.appendChild(fileInput);
+    uploadBox.appendChild(fileInfo);
+    
+    // --- Form ---
+    const form = document.createElement("form");
+    form.classList.add("add-photo-form");
+    
+    // Title input
+    const titleLabel = document.createElement("label");
+    titleLabel.textContent = "Title";
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.name = "title";
+    
+    // Category dropdown
+    const categoryLabel = document.createElement("label");
+    categoryLabel.textContent = "Category";
+    const categorySelect = document.createElement("select");
+    categorySelect.name = "category";
+    ["Select category", "Objects", "Apartments", "Hotels & restauraunts"].forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat.toLowerCase();
+        option.textContent = cat;
+        categorySelect.appendChild(option);
+    });
+    
+    form.appendChild(titleLabel);
+    form.appendChild(titleInput);
+    form.appendChild(categoryLabel);
+    form.appendChild(categorySelect);
+
+    //Confirm button
+    const confirmBtn = document.createElement("button");
+    confirmBtn.type = "button";
+    confirmBtn.textContent = "Confirm";
+    confirmBtn.classList.add("button", "confirm-btn");
+
+    confirmBtn.addEventListener("click", () => {
+        console.log("Form submitted!");
+    })
+    
+    // Add everything to modal
+    modalGallery.appendChild(uploadBox);
+    modalGallery.appendChild(form);
+    modalGallery.appendChild(confirmBtn);
+    
+}
+
 fetch("http://localhost:5678/api/works")
     .then(response => response.json())
     .then(works => {
@@ -126,6 +222,7 @@ addFilterButtons();
 const token = localStorage.getItem("token");
 const authLink = document.getElementById("auth-link");
 const editButton = document.getElementById("edit-button");
+const addPhotoBtn = document.getElementById("add-photo-btn");
 
 if (token) {
     //Hide filters
@@ -172,6 +269,10 @@ window.addEventListener("click", (event) => {
     if (event.target === modal) {
         modal.style.display = "none";
     }
+});
+
+addPhotoBtn.addEventListener("click", () => {
+    renderAddPhotoForm();
 });
 
 
