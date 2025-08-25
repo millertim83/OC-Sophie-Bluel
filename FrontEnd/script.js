@@ -1,6 +1,10 @@
 const gallery = document.getElementById("gallery");
 let allWorks = [];
 const filtersContainer = document.getElementById("filters");
+const token = localStorage.getItem("token");
+const authLink = document.getElementById("auth-link");
+const editButton = document.getElementById("edit-button");
+const addPhotoBtn = document.getElementById("add-photo-btn");
 
 
 function renderGallery(works) {
@@ -117,6 +121,7 @@ function populateModalGallery() {
 function renderAddPhotoForm() {
     // clear gallery
     modalGallery.innerHTML = "";
+    addPhotoBtn.style.display = "none";
     
     // --- Upload box ---
     const uploadBox = document.createElement("div");
@@ -179,14 +184,29 @@ function renderAddPhotoForm() {
     // Category dropdown
     const categoryLabel = document.createElement("label");
     categoryLabel.textContent = "Category";
+    
     const categorySelect = document.createElement("select");
     categorySelect.name = "category";
-    ["Select category", "Objects", "Apartments", "Hotels & restauraunts"].forEach(cat => {
-        const option = document.createElement("option");
-        option.value = cat.toLowerCase();
-        option.textContent = cat;
-        categorySelect.appendChild(option);
-    });
+    
+    // First add a placeholder option
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Select category";
+    categorySelect.appendChild(placeholder);
+    
+    // Fetch categories from API
+    fetch("http://localhost:5678/api/categories")
+        .then(response => response.json())
+        .then(categories => {
+            categories.forEach(cat => {
+                const option = document.createElement("option");
+                option.value = cat.id;  // the API ID
+                option.textContent = cat.name; // display name
+                categorySelect.appendChild(option);
+            });
+        })
+        .catch(err => console.error("Failed to load categories:", err));
+    
     
     form.appendChild(titleLabel);
     form.appendChild(titleInput);
@@ -199,15 +219,64 @@ function renderAddPhotoForm() {
     confirmBtn.textContent = "Confirm";
     confirmBtn.classList.add("button", "confirm-btn");
 
-    confirmBtn.addEventListener("click", () => {
-        console.log("Form submitted!");
-    })
+    confirmBtn.addEventListener("click", async (event) => {
+        event.preventDefault();
+        try {
+            await addPhotoToAPI();
+            console.log("Photo added successfully");
+        } catch (err) {
+            console.error("Error adding photo:", err);
+        }
+    });
     
     // Add everything to modal
-    modalGallery.appendChild(uploadBox);
-    modalGallery.appendChild(form);
-    modalGallery.appendChild(confirmBtn);
+    const addPhotoContainer = document.getElementById("add-photo-container");
+    addPhotoContainer.innerHTML = "";
+    addPhotoContainer.appendChild(uploadBox);
+    addPhotoContainer.appendChild(form);
+    addPhotoContainer.appendChild(confirmBtn);
     
+}
+
+async function addPhotoToAPI() {
+    const container = document.getElementById("add-photo-container");
+    const fileInput = container.querySelector('input[type="file"]');
+    const titleInput = container.querySelector('input[name="title"]');
+    const categorySelect =  container.querySelector('select[name="category"]');
+
+    if (!fileInput.files[0]) return alert("Please select a file.");
+    if (!titleInput.value) return alert("Please enter a title.");
+    if (!categorySelect.value || categorySelect.value === "select category") 
+        return alert("Please select a category.");
+
+    const formData = new FormData();
+    formData.append("image", fileInput.files[0]);
+    formData.append("title", titleInput.value);
+    formData.append("category", categorySelect.value);
+
+    try {
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            body: formData
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Photo added:", data);
+
+            allWorks.push(data);
+            populateModalGallery(allWorks);
+            renderGallery(allWorks);
+            modal.style.display = "none";
+        } else {
+            console.error("Failed to add photo:", response.status);
+        }
+    } catch (error) {
+        console.error("Error adding photo:", error);
+    }
 }
 
 fetch("http://localhost:5678/api/works")
@@ -219,10 +288,6 @@ fetch("http://localhost:5678/api/works")
 
 addFilterButtons();
 
-const token = localStorage.getItem("token");
-const authLink = document.getElementById("auth-link");
-const editButton = document.getElementById("edit-button");
-const addPhotoBtn = document.getElementById("add-photo-btn");
 
 if (token) {
     //Hide filters
@@ -258,7 +323,10 @@ const modalGallery = document.getElementById("modal-gallery");
 editButton.addEventListener("click", () => {
     //Open modal
     modal.style.display = "block";
+    document.getElementById("gallery-view").style.display = "block";
+    document.getElementById("add-photo-view").style.display = "none";
     populateModalGallery(allWorks);
+    addPhotoBtn.style.display = "block";
 });
 
 modalClose.addEventListener("click", () => {
@@ -272,8 +340,18 @@ window.addEventListener("click", (event) => {
 });
 
 addPhotoBtn.addEventListener("click", () => {
+    const addPhotoView = document.getElementById("add-photo-view");
+    addPhotoView.style.display = "flex";
+
+    const addPhotoContainer = document.getElementById("add-photo-container");
+    addPhotoContainer.innerHTML = "";
     renderAddPhotoForm();
 });
+
+
+
+
+
 
 
 

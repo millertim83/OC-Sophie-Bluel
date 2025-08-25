@@ -374,8 +374,12 @@ a:visited {
   }
 
   #add-photo-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	margin-top: 20px;
 	display: flex;
+	gap: 20px;
 	justify-content: center;
 	width: 100%
   }
@@ -394,7 +398,22 @@ a:visited {
 	z-index: 1;
   }
 
+  #gallery-actions {
+	display: flex;
+	justify-content: center;	
+	margin-top: 20px;
+  }
+
   /* Add Photo */
+
+  #add-photo-view {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	padding: 20px;
+	width: 100%;
+  }
 
   .upload-box {
 	display: flex;
@@ -406,28 +425,15 @@ a:visited {
 	padding: 20px;
 	margin: 0 auto 20px auto; /* center horizontally */
 	max-width: 300px;
+	width: 100%;
+	text-align: center;
   }
-  
-  .upload-icon {
-	font-size: 4rem;
-	color: #a0a0a0;
-	margin-bottom: 10px;
-  }
-  
+
   .preview-img {
 	max-width: 100%;
 	max-height: 200px;
 	margin-bottom: 10px;
 	border-radius: 6px;
-  }
-  
-  .upload-box button {
-	margin: 10px 0;
-  }
-  
-  .upload-box p {
-	font-size: 0.9rem;
-	color: #666;
   }
   
   .add-photo-form {
@@ -436,7 +442,6 @@ a:visited {
 	gap: 15px;
 	width: 100%;
 	max-width: 400px;
-	margin: 0 auto; 
   }
   
   .add-photo-form label {
@@ -452,11 +457,13 @@ a:visited {
   }
 
   .confirm-btn {
-	display: block;
-	margin: 20px auto 0 auto;
+	align-self: center;
+	margin-top: 10px;
 	padding: 10px 20px;
 	font-size: 1rem;
   }
+
+  
   
 
   
