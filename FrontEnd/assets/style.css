@@ -463,6 +463,16 @@ a:visited {
 	font-size: 1rem;
   }
 
+  .back-arrow {
+	cursor: pointer;
+	font-size: 1.2rem;
+	margin-bottom: 10px;
+	display: inline-block;
+  }
+  
+  .back-arrow:hover {
+	color: #007BFF; /* highlight on hover */
+  }
   
   
 

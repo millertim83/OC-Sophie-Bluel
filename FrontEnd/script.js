@@ -340,6 +340,9 @@ window.addEventListener("click", (event) => {
 });
 
 addPhotoBtn.addEventListener("click", () => {
+    const galleryView =  document.getElementById("gallery-view");
+    galleryView.style.display = "none";
+
     const addPhotoView = document.getElementById("add-photo-view");
     addPhotoView.style.display = "flex";
 
@@ -347,6 +350,19 @@ addPhotoBtn.addEventListener("click", () => {
     addPhotoContainer.innerHTML = "";
     renderAddPhotoForm();
 });
+
+document.getElementById("back-to-gallery").addEventListener("click", async (event) => {
+   const galleryView = document.getElementById("gallery-view");
+    const addPhotoView = document.getElementById("add-photo-view");
+
+    addPhotoView.style.display = "none";
+    galleryView.style.display = "block";
+    addPhotoBtn.style.display = "block";
+
+    await populateModalGallery();
+    
+  });
+  
 
 
 
