@@ -133,7 +133,7 @@ function renderAddPhotoForm() {
 
     //preview image
     const previewImg = document.createElement("img");
-    imageIcon.classList.add("preview-img");
+    previewImg.classList.add("preview-img");
     previewImg.style.display = "none;"
     
     // input[type=file] hidden, triggered by button
@@ -158,7 +158,10 @@ function renderAddPhotoForm() {
             reader.onload = e => {
                 previewImg.src = e.target.result;
                 previewImg.style.display = "block";
+
                 imageIcon.style.display = "none";
+                fileBtn.style.display = "none";
+                fileInfo.style.display = "none";
             };
             reader.readAsDataURL(file);
         }
