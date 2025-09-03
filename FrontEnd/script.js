@@ -1,10 +1,13 @@
-const gallery = document.getElementById("gallery");
 let allWorks = [];
+const gallery = document.getElementById("gallery");
 const filtersContainer = document.getElementById("filters");
 const token = localStorage.getItem("token");
 const authLink = document.getElementById("auth-link");
 const editButton = document.getElementById("edit-button");
 const addPhotoBtn = document.getElementById("add-photo-btn");
+const modal = document.getElementById("modal");
+const modalClose = document.getElementById("modal-close");
+const modalGallery = document.getElementById("modal-gallery");
 
 
 function renderGallery(works) {
@@ -22,7 +25,6 @@ function renderGallery(works) {
         gallery.appendChild(figure);
     });
     }
-
 
 function addFilterButtons() {
     fetch("http://localhost:5678/api/categories") 
@@ -83,7 +85,9 @@ function populateModalGallery() {
         //create delete icon
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
-        deleteIcon.addEventListener("click", async () => {
+        deleteIcon.addEventListener("click", async (e) => {
+            e.stopPropagation();
+
             try {
                 const response = await fetch(`http://localhost:5678/api/works/${work.id}`, {
                     method: "DELETE",
@@ -116,7 +120,6 @@ function populateModalGallery() {
         modalGallery.appendChild(thumbContainer);
     });
 }
-
 
 function renderAddPhotoForm() {
     // clear gallery
@@ -318,10 +321,6 @@ if (token) {
 }
 
 //***  Modal   ***//
-
-const modal = document.getElementById("modal");
-const modalClose = document.getElementById("modal-close");
-const modalGallery = document.getElementById("modal-gallery");
 
 editButton.addEventListener("click", () => {
     //Open modal

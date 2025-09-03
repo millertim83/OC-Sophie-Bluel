@@ -52,6 +52,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
 header {
 	display: flex;
@@ -150,7 +151,7 @@ li:hover {
 }
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -225,6 +226,7 @@ a:visited {
 /* Login page */
 
 #login {
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -279,6 +281,41 @@ a:visited {
 	color: black;
 	font-size: 14px;
 	margin-left: 15px;
+}
+
+#login h2 {
+    margin-bottom: 20px;
+}
+
+#login form {
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#login input {
+    height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+    margin: 2em 0 1em 0;
+}
+
+.login-page {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.login-page main {
+	flex: 1;
+}
+
+.login-page footer {
+	margin-top: auto;
 }
 
 /* Modal */
