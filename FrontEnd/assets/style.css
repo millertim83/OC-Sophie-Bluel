@@ -222,106 +222,22 @@ a:visited {
 	background-color: #1D6154;
 }
 
-
-/* Login page */
-
-#login {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-#login-form {
-	display: flex;
-	flex-direction: column;
-	font-family: 'Work Sans';
-	font-weight: 500;
-	font-size: 14px;
-	width: 379px;
-	height: 51px;
-}
-
-#login-form label {
-	margin-bottom: 7px;
-}
-
-#login-form input {
-	margin-bottom: 10px;
-}
-
-#sign-in {
-	background-color: #1D6154;
-	color: #FFFFFF;
-	width: 126px;
-	font-family: Syne;
-	font-size: 14px;
-	font-weight: 700;
-	border-radius: 60px;
-	align-self: center;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	border: none;
-}
-
-#forgot-password {
-	align-self: center;
-	color: #3D3D3D;
-}
-
 .edit-button {
 	display: inline-flex;
 	align-items: center;
 	gap: 5px;
 	cursor: pointer;
-}
-
-#portfolio span {
 	color: black;
-	font-size: 14px;
+	font-size: 16px;
 	margin-left: 15px;
-}
-
-#login h2 {
-    margin-bottom: 20px;
-}
-
-#login form {
-    text-align: left;
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-}
-
-#login input {
-    height: 50px;
-    font-size: 1.2em;
-    border: none;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#login label {
-    margin: 2em 0 1em 0;
-}
-
-.login-page {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
-.login-page main {
-	flex: 1;
-}
-
-.login-page footer {
-	margin-top: auto;
 }
 
 /* Modal */
 
 .modal {
-	display: none; /* Hidden by default */
+	width: 630px;
+	height: 688px;
+	display: none;
 	position: fixed;
 	z-index: 999;
 	left: 0;
@@ -330,6 +246,7 @@ a:visited {
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(0,0,0,0.7);
+	padding: 16px;
   }
   
   .modal-content {
@@ -348,8 +265,12 @@ a:visited {
   }
 
   .modal-content h3 {
+	font-size: 26px;
+	font-weight: 400;
+	line-height: 100%;
 	text-align: center;
 	margin-top: 0;
+	padding: 16px;
   }
   
   #modal-close {
@@ -420,6 +341,14 @@ a:visited {
 	justify-content: center;
 	width: 100%
   }
+
+  .modal-divider {
+    border: none;
+    border-top: 1px solid #B3B3B3;
+	margin: 20px auto;
+	width: 420px;
+}
+
   
   /* Trash Icon Styling */
   .delete-icon {
@@ -460,24 +389,25 @@ a:visited {
 	border-radius: 8px;
 	padding: 20px;
 	margin: 0 auto 20px auto; /* center horizontally */
-	max-width: 300px;
-	width: 100%;
+	width: 420px;
+	height: 169px;
 	text-align: center;
   }
 
-  .preview-img {
-	max-width: 100%;
-	max-height: 200px;
+ .upload-icon {
+	width: 76px;
+	height: 76px;
 	margin-bottom: 10px;
 	border-radius: 6px;
+	font-size: 76px;
+	color: lightgray;
   }
   
   .add-photo-form {
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
-	width: 100%;
-	max-width: 400px;
+	width: 420px;
   }
   
   .add-photo-form label {
@@ -486,10 +416,17 @@ a:visited {
   
   .add-photo-form input,
   .add-photo-form select {
+	height: 50px;
+	font-size: 1.2em;
 	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	width: 100%;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    margin-bottom: 10px;
+  }
+
+  #add-photo-UI-btn {
+	background-color: lightgray;
+	color: #306685;
   }
 
   .confirm-btn {
@@ -511,7 +448,78 @@ a:visited {
 	color: #007BFF; /* highlight on hover */
   }
   
-  
+/* LOGIN PAGE LAYOUT */
+body.login-page {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: #FFFEF8; /* keep your background */
+}
+
+body.login-page main#login {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center; /* centers h2 + form together */
+	text-align: center;
+}
+
+body.login-page footer {
+	margin-top: auto; /* footer stays at bottom */
+}
+
+/* LOGIN FORM */
+#login h2 {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154;
+	margin-bottom: 20px;
+}
+
+#login-form {
+	display: flex;
+	flex-direction: column;
+	width: 379px;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	font-size: 14px;
+	text-align: left; /* aligns form labels/inputs left */
+}
+
+#login-form label {
+	margin: 1.5em 0 0.5em 0;
+}
+
+#login-form input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 10px;
+}
+
+#sign-in {
+	background-color: #1D6154;
+	color: #FFFFFF;
+	width: 126px;
+	font-family: Syne;
+	font-size: 14px;
+	font-weight: 700;
+	border-radius: 60px;
+	align-self: center;
+	margin: 20px 0;
+	border: none;
+	cursor: pointer;
+}
+
+#forgot-password {
+	align-self: center;
+	color: #3D3D3D;
+	font-size: 0.9em;
+	text-decoration: none;
+}
+
 
   
-

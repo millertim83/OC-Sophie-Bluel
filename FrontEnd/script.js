@@ -86,8 +86,6 @@ function populateModalGallery() {
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
         deleteIcon.addEventListener("click", async (e) => {
-            e.stopPropagation();
-
             try {
                 const response = await fetch(`http://localhost:5678/api/works/${work.id}`, {
                     method: "DELETE",
@@ -112,13 +110,22 @@ function populateModalGallery() {
                 console.error("Error deleting work:", err);
             }
         });
-        
 
-        //assemble
+        // assemble
         thumbContainer.appendChild(img);
         thumbContainer.appendChild(deleteIcon);
         modalGallery.appendChild(thumbContainer);
     });
+
+    // Add divider line
+    const galleryActions = document.getElementById("gallery-actions");
+    if (!galleryActions.previousElementSibling || 
+        !galleryActions.previousElementSibling.classList.contains("modal-divider")) {
+        
+        const divider = document.createElement("hr");
+        divider.classList.add("modal-divider");
+        galleryActions.parentNode.insertBefore(divider, galleryActions);
+    }
 }
 
 function renderAddPhotoForm() {
@@ -145,10 +152,12 @@ function renderAddPhotoForm() {
     fileInput.accept = "image/png, image/jpeg";
     fileInput.style.display = "none";
     
+    // Add photo button
     const fileBtn = document.createElement("button");
     fileBtn.type = "button";
     fileBtn.textContent = "+ Add photo";
     fileBtn.classList.add("button");
+    fileBtn.id = "add-photo-UI-btn";
     fileBtn.addEventListener("click", () => fileInput.click());
     
     const fileInfo = document.createElement("p");
@@ -219,7 +228,11 @@ function renderAddPhotoForm() {
     form.appendChild(categoryLabel);
     form.appendChild(categorySelect);
 
-    //Confirm button
+    // Creater divider
+    const divider = document.createElement("hr");
+    divider.classList.add("modal-divider");
+
+    // Confirm button
     const confirmBtn = document.createElement("button");
     confirmBtn.type = "button";
     confirmBtn.textContent = "Confirm";
@@ -240,6 +253,7 @@ function renderAddPhotoForm() {
     addPhotoContainer.innerHTML = "";
     addPhotoContainer.appendChild(uploadBox);
     addPhotoContainer.appendChild(form);
+    addPhotoContainer.appendChild(divider);
     addPhotoContainer.appendChild(confirmBtn);
     
 }
@@ -250,11 +264,13 @@ async function addPhotoToAPI() {
     const titleInput = container.querySelector('input[name="title"]');
     const categorySelect =  container.querySelector('select[name="category"]');
 
+    // Require form be filled out completely
     if (!fileInput.files[0]) return alert("Please select a file.");
     if (!titleInput.value) return alert("Please enter a title.");
     if (!categorySelect.value || categorySelect.value === "select category") 
         return alert("Please select a category.");
 
+    // Assemble form
     const formData = new FormData();
     formData.append("image", fileInput.files[0]);
     formData.append("title", titleInput.value);
@@ -294,7 +310,7 @@ fetch("http://localhost:5678/api/works")
 
 addFilterButtons();
 
-
+// Check for token
 if (token) {
     //Hide filters
     const filtersContainer = document.getElementById("filters");
@@ -331,6 +347,7 @@ editButton.addEventListener("click", () => {
     addPhotoBtn.style.display = "block";
 });
 
+// Close modal
 modalClose.addEventListener("click", () => {
     modal.style.display = "none";
 });
@@ -341,6 +358,7 @@ window.addEventListener("click", (event) => {
     }
 });
 
+// Add Photo UI
 addPhotoBtn.addEventListener("click", () => {
     const galleryView =  document.getElementById("gallery-view");
     galleryView.style.display = "none";
@@ -353,6 +371,7 @@ addPhotoBtn.addEventListener("click", () => {
     renderAddPhotoForm();
 });
 
+// Back button
 document.getElementById("back-to-gallery").addEventListener("click", async (event) => {
    const galleryView = document.getElementById("gallery-view");
     const addPhotoView = document.getElementById("add-photo-view");
