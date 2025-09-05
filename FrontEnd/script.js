@@ -237,7 +237,21 @@ function renderAddPhotoForm() {
     confirmBtn.type = "button";
     confirmBtn.textContent = "Confirm";
     confirmBtn.classList.add("button", "confirm-btn");
+    confirmBtn.disabled = true;
 
+    // Validate form
+    function validateAddPhotoForm() {
+        const hasImage = previewImg && previewImg.src && previewImg.src !== "";
+        const hasTitle = titleInput.value.trim() !== "";
+        const hasCategory = categorySelect.value !== "";
+    
+        confirmBtn.disabled = !(hasImage && hasTitle && hasCategory)
+    }
+
+    // Confirm event listeners for validation
+    titleInput.addEventListener("input", validateAddPhotoForm);
+    categorySelect.addEventListener("change", validateAddPhotoForm);
+    
     confirmBtn.addEventListener("click", async (event) => {
         event.preventDefault();
         try {
