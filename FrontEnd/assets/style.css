@@ -385,10 +385,10 @@ a:visited {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-color: #eaf2ff; /* light blue */
+	background-color: #E8F1F6; 
 	border-radius: 8px;
-	padding: 20px;
-	margin: 0 auto 20px auto; /* center horizontally */
+	
+	margin: 0 auto 20px auto; 
 	width: 420px;
 	height: 169px;
 	text-align: center;
@@ -427,6 +427,12 @@ a:visited {
   #add-photo-UI-btn {
 	background-color: lightgray;
 	color: #306685;
+  }
+
+  .preview-img {
+	display: none;
+	height: 193px;
+	width: 129px;
   }
 
   .confirm-btn {
