@@ -133,7 +133,7 @@ function renderAddPhotoForm() {
     modalGallery.innerHTML = "";
     addPhotoBtn.style.display = "none";
     
-    // --- Upload box ---
+    // Upload box for selecting image
     const uploadBox = document.createElement("div");
     uploadBox.classList.add("upload-box");
     
