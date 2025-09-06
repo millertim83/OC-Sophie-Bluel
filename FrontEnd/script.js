@@ -52,7 +52,7 @@ function addFilterButtons() {
 function addFilterButtonEvents() {
     const filterButtons = document.querySelectorAll(".filter-button");
     filterButtons.forEach(button => {
-        button.addEventListener("click", event => {
+        button.addEventListener("click", () => {
             filterButtons.forEach(btn => btn.classList.remove("active"));
 
             button.classList.add("active");
@@ -251,7 +251,7 @@ function renderAddPhotoForm() {
     // Confirm event listeners for validation
     titleInput.addEventListener("input", validateAddPhotoForm);
     categorySelect.addEventListener("change", validateAddPhotoForm);
-    
+
     confirmBtn.addEventListener("click", async (event) => {
         event.preventDefault();
         try {
@@ -315,6 +315,7 @@ async function addPhotoToAPI() {
     }
 }
 
+//Fetch Works
 fetch("http://localhost:5678/api/works")
     .then(response => response.json())
     .then(works => {
@@ -323,6 +324,8 @@ fetch("http://localhost:5678/api/works")
     });
 
 addFilterButtons();
+
+//EVENT LISTENERS
 
 // Check for token
 if (token) {
@@ -351,7 +354,6 @@ if (token) {
 }
 
 //***  Modal   ***//
-
 editButton.addEventListener("click", () => {
     //Open modal
     modal.style.display = "block";
